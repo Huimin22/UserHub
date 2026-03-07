@@ -1,0 +1,22 @@
+package com.weblio.userhub.controller;
+
+import com.weblio.userhub.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+@RequestMapping("/admin")
+public class AdminController {
+
+    @Autowired
+    private UserService userService;
+
+    // List all users (admin only)
+    @GetMapping("/users")
+    public String listUsers(Model model) {
+        model.addAttribute("users", userService.getAllUsers());
+        return "admin/users";  // Thymeleaf template
+    }
+}
